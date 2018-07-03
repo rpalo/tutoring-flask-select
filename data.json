@@ -1,0 +1,30 @@
+[
+  {
+    "item": "shoe",
+    "coords": [
+      40,
+      -90
+    ]
+  },
+  {
+    "item": "belt",
+    "coords": [
+      45,
+      -100
+    ]
+  },
+  {
+    "item": "shoe",
+    "coords": [
+      35,
+      -120
+    ]
+  },
+  {
+    "item": "belt",
+    "coords": [
+      45,
+      -110
+    ]
+  }
+]
