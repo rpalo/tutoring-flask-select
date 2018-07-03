@@ -1,0 +1,6 @@
+name,latitude,longitude,item,date
+LAX,40.1,-100.1,gun,2018-01-01
+DFW,45.1,-105.1,knife,2018-01-02
+Other Airport,50.1,-110.1,bazooka,2018-01-03
+LAX,40.1,-100.1,knife,2018-01-04
+DFW,45.1,-105.1,bazooka,2018-01-05

@@ -13,17 +13,20 @@ var markers = [];
 var items = new Set;
 var selector = document.querySelector("#choice");
 
-d3.json('./data.json', function (data) {
+d3.json('/data', function (data) {
 
   data.forEach(function (datapoint) {
     marker = L.marker(datapoint.coords,
       {
-        item: datapoint.item
+        items: datapoint.items,
+        name: datapoint.name
       }
     );
     markers.push(marker);
     marker.addTo(mymap);
-    items.add(datapoint.item);
+    Object.keys(datapoint.items).forEach(function (item) {
+      items.add(item);
+    }
   });
 
   items.forEach(function (item) {
