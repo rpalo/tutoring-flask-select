@@ -6,7 +6,7 @@ from flask import (
     jsonify)
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session, subqueryload
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import create_engine, inspect, func
 
 Base = automap_base()
@@ -24,16 +24,20 @@ class Incident(Base):
 
 engine = create_engine("sqlite:///db/mergemap.sqlite", echo=False)
 Base.prepare(engine, reflect=True)
-session = Session(engine)
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factory)
 
 app = Flask(__name__)
 
 
 @app.route("/data")
 def data():
+    session = Session()
     sel = [Incident.name, Incident.latitude,
            Incident.longitude, Incident.item, func.count(Incident.item)]
     records = session.query(*sel).group_by(Incident.name, Incident.item).all()
+    Session.remove()
+
     results = {}
     for record in records:
         name, lat, long, item, count = record
