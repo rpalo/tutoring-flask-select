@@ -15,7 +15,7 @@ var selector = document.querySelector("#choice");
 
 d3.json('/data', function (data) {
   data.forEach(function (datapoint) {
-    marker = L.marker(datapoint.coords,
+    marker = L.marker([datapoint.lat, datapoint.long],
       {
         items: datapoint.items,
         name: datapoint.name
@@ -25,20 +25,20 @@ d3.json('/data', function (data) {
     marker.addTo(mymap);
     Object.keys(datapoint.items).forEach(function (item) {
       items.add(item);
-    }
+    });
   });
 
   items.forEach(function (item) {
     const option = document.createElement('option');
     option.innerHTML = item;
     selector.appendChild(option);
-  })
+  });
 });
 
 selector.addEventListener('change', function () {
   const selected = this.value;
   markers.forEach(function (marker) {
-    if (marker.options.item == selected || selected == '') {
+    if (Object.keys(marker.options.items).includes(selected) || selected == '') {
       marker.setOpacity(1);
     } else {
       marker.setOpacity(0);
