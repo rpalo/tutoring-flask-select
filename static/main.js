@@ -3,18 +3,17 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 18,
   id: 'mapbox.streets',
-  accessToken: 'example.key'
+  accessToken: apiKey
 }).addTo(mymap);
 
 // Until you put in your api key, this code won't work.
-console.error("Make sure the 'accessToken' on main.js:6 is your real api key.");
+//console.error("Make sure the 'accessToken' on main.js:6 is your real api key.");
 
 var markers = [];
 var items = new Set;
 var selector = document.querySelector("#choice");
 
 d3.json('/data', function (data) {
-
   data.forEach(function (datapoint) {
     marker = L.marker(datapoint.coords,
       {
